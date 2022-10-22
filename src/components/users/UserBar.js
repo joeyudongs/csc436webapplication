@@ -1,34 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from 'react';
+import Logout from "./Logout";
 import Register from "./Register";
-import Login from "./Login";
-import { StateContext } from "../hooks/Contexts";
-import { Button } from "react-bootstrap";
+import Login from './Login';
 
-function UserBar() {
-    const Logout = React.lazy(() => import('./Logout'))
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
-  const { state } = useContext(StateContext);
-
-  if (state.user.username) {
-    return <Logout />;
-  } else {
-    return (
-      <div className="justify-content-end">
-        <Button style={{marginRight: 6}} variant="primary" onClick={(e) => setShowLogin(true)}>
-          Login
-        </Button>
-        <Login show={showLogin} handleClose={() => setShowLogin(false)} />
-        <Button variant="primary" onClick={(e) => setShowRegister(true)}>
-          Register
-        </Button>
-        <Register
-          show={showRegister}
-          handleClose={() => setShowRegister(false)}
-        />
-      </div>
-    );
-  }
+function UserBar({user, dispatchUser}) {
+    console.log("UserBar freshstart")
+    if (user) {
+        console.log("UserBar if User")
+        return <Logout user={user} dispatchUser={dispatchUser}/>;
+    } else {
+        console.log("UserBar else User")
+        return (
+            <div>
+                <Login dispatchUser={dispatchUser} />
+                <Register dispatchUser={dispatchUser} />
+            </div>
+        );
+    }
 }
 
 export default UserBar;

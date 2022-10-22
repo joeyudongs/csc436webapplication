@@ -1,106 +1,38 @@
-import React, { useContext, useEffect } from "react";
-import { Link } from "react-navi";
-import { ThemeContext, StateContext } from "../hooks/Contexts";
-import { useResource } from "react-request-hook";
-import { Card, Button } from "react-bootstrap";
-function Todo({
-  title,
-  content,
-  author,
-  completedOn,
-  complete,
-  todoId,
-  short = false,
-}) {
-  const { dispatch } = useContext(StateContext);
+import React from 'react';
 
-  console.log("Todo Rendered");
-  const [deletedTodo, deleteTodo] = useResource((todoId) => ({
-    url: `/todos/${todoId}`,
-    method: "delete",
-  }));
-  console.log(todoId);
-
-  const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
-    url: `/todos/${todoId}`,
-    method: "patch",
-    data: {
-      complete: completed,
-      completedOn: Date.now(),
-    },
-  }));
-
-  useEffect(() => {
-    if (deletedTodo && deletedTodo.data && deletedTodo.isLoading === false) {
-      dispatch({ type: "DELETE_TODO", todoId: todoId });
+function Todo({ title, content, dateCreated, completed, dateCompleted, dispatch}) {
+    console.log("Todo fresh start")
+    function handleDelete(e) {
+        e.preventDefault();
+        dispatch({type: "DELETE_TODO", title})
     }
-  }, [deletedTodo]);
 
-  useEffect(() => {
-    if (toggledTodo && toggledTodo.data && toggledTodo.isLoading === false) {
-      dispatch({
-        type: "TOGGLE_TODO",
-        complete: toggledTodo.data.complete,
-        completedOn: toggledTodo.data.completeOn,
-        todoId,
-      });
+    function handleToggle() {
+        dispatch({type: "TOGGLE_TODO", title, completed})
     }
-  }, [toggledTodo]);
-
-  let processedContent = content;
-  if (short) {
-    if (content.length > 30) {
-      processedContent = content.substring(0, 30) + "...";
+    if (completed) {
+        return (
+            <div>
+                <h3>{title}</h3>
+                <div>{content}</div>
+                <div>Created at: {new Date(Date.now()).toLocaleString()}</div>
+                <div>Completed at: {new Date(Date.now()).toLocaleString()}</div>
+                <button onClick={e => handleDelete(e)}>Delete</button>
+                <input type="checkbox" onClick={handleToggle} />
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <h3>{title}</h3>
+                <div>{content}</div>
+                <div>Created at <b>{new Date(Date.now()).toLocaleString()}</b></div>
+                <div>Completed: {completed ? 'Yes' : 'No'}</div>
+                <button onClick={e => handleDelete(e)}>Delete</button>
+                <input type="checkbox" onClick={handleToggle} />
+            </div>
+        );
     }
-  }
-
-  return (
-    <Card>
-      <Card.Body>
-        <Card.Title>
-          <Link style={{ color: "#000000" }} href={`/todo/${todoId}`}>
-            {title}
-          </Link>
-        </Card.Title>
-        <Card.Subtitle>
-          <i style={{ color: "#000000" }}>
-            Created by <b>{author}</b>
-          </i>
-        </Card.Subtitle>
-        <Card.Text>{processedContent}</Card.Text>
-        <input
-          type="checkbox"
-          checked={complete}
-          onChange={(e) => {
-            toggleTodo(todoId, e.target.checked);
-          }}
-        />
-        {short && (
-          <Button
-            variant="blank"
-            href={`/todo/${todoId}`}
-            style={{ backgroundColor: "#94b0ab" }}
-          >
-            View Full Content
-          </Button>
-        )}
-        <Button
-          variant="blank"
-          onClick={() => {
-            deleteTodo(todoId);
-          }}
-          style={{ backgroundColor: "#94b0f1" }}
-        >
-          Delete Todo
-        </Button>
-        {complete && (
-          <i>
-            Completed on: {new Date(completedOn).toLocaleDateString("en-us")}
-          </i>
-        )}
-      </Card.Body>
-    </Card>
-  );
 }
 
-export default React.memo(Todo);
+export default Todo;
