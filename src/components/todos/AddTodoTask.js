@@ -5,12 +5,15 @@ function AddTodoTask({user, dispatch}) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     function handleTitle(evt) {
+        console.log("handleTitle")
         setTitle(evt.target.value);
     }
     function handleContent(evt) {
+        console.log("handleContent")
         setContent(evt.target.value);
     }
     function handleSubmit(e) {
+        console.log("In AddTodoTask handleSubmit")
         e.preventDefault();
         dispatch({type: "CREATE_TODO", title, content, author: user, completed: false})
     }

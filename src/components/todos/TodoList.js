@@ -3,6 +3,8 @@ import Todo from "./Todo";
 
 function TodoList({todos = [], dispatch}) {
     console.log("TodoList fresh start")
+    console.log("In TodoList todos: ", todos)
+    console.log("In TodoList dispatch: ", dispatch)
     return (
         <div>
             {todos.map((todo, i) =>

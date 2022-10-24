@@ -3,11 +3,14 @@ import React from 'react';
 function Todo({ title, content, dateCreated, completed, dateCompleted, dispatch}) {
     console.log("Todo fresh start")
     function handleDelete(e) {
+        console.log("In Todo handleDelete")
+        console.log("title", title)
         e.preventDefault();
         dispatch({type: "DELETE_TODO", title})
     }
 
     function handleToggle() {
+        console.log("In Todo handleToggle")
         dispatch({type: "TOGGLE_TODO", title, completed})
     }
     if (completed) {
