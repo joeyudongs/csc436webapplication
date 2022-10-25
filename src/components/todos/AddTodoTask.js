@@ -1,21 +1,17 @@
 import React, {useState} from 'react';
 
 function AddTodoTask({user, dispatch}) {
-    console.log("AddTodoTask fresh start")
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     function handleTitle(evt) {
-        console.log("handleTitle")
         setTitle(evt.target.value);
     }
     function handleContent(evt) {
-        console.log("handleContent")
         setContent(evt.target.value);
     }
     function handleSubmit(e) {
-        console.log("In AddTodoTask handleSubmit")
         e.preventDefault();
-        dispatch({type: "CREATE_TODO", title, content, author: user, completed: false})
+        dispatch({type: 'CREATE_TODO', title, content, author: user})
     }
     return (
         <form onSubmit={e => {handleSubmit(e)}}>

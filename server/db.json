@@ -1,96 +1,45 @@
 {
   "todos": [
     {
-      "title": "test0",
-      "content": "test0",
-      "author": "Oct",
-      "id": 0,
-      "complete": false,
-      "completedOn": 1637311960245
-    },
-    {
-      "title": "test1",
-      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "author": "Oct",
-      "id": 1,
-      "complete": false,
-      "completedOn": 1637303328033
-    },
-    {
-      "title": "test2",
-      "content": "test2",
-      "author": "Oct",
-      "id": 2,
-      "complete": false,
-      "completedOn": 1637222680760
-    },
-    {
-      "title": "test3",
-      "content": "test3",
-      "author": "Oct",
       "id": 3,
+      "title": "Todo-3",
+      "content": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
+      "author": "Seb",
       "complete": false,
-      "completedOn": 1637219846076
+      "completedOn": null
     },
     {
-      "title": "test4",
-      "content": "test4",
-      "author": "Oct",
       "id": 4,
+      "title": "Todo-4444444",
+      "content": "Test Post444444",
+      "author": "Sebastian Gao",
       "complete": false,
-      "completedOn": 1637219845261
+      "completedOn": null
     },
     {
-      "title": "test5",
-      "content": "\"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?\"",
-      "author": "Oct",
       "id": 5,
+      "title": "Todo-5",
+      "content": "Test Post",
+      "author": "Liang",
       "complete": false,
-      "completedOn": 1637219841899
-    },
-    {
-      "title": "Nov-1",
-      "content": "sfdrdfsgdrzdgfsdrf",
-      "author": "Nov",
-      "id": 6
-    },
-    {
-      "title": "Sebastian-1",
-      "content": "dakjsgz chvjkx zlijxlcjln kcnvdfgcfgvh",
-      "author": "Sebastian",
-      "id": 7
+      "completedOn": null
     }
   ],
   "users": [
     {
       "id": 1,
       "username": "paul",
-      "password": "1234"
+      "password": "badpassword"
     },
     {
       "id": 2,
       "username": "Sebastian",
-      "password": "1234"
+      "password": "badpassword"
     },
     {
       "username": "Liang",
-      "password": "1234",
+      "password": "badpassword",
       "id": 3
-    },
-    {
-      "username": "Oct",
-      "password": "1234",
-      "id": 4
-    },
-    {
-      "username": "Seba",
-      "password": "1234",
-      "id": 5
-    },
-    {
-      "username": "Nov",
-      "password": "1234",
-      "id": 6
     }
   ],
   "themes": [

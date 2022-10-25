@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
+import {useContext} from 'react/cjs/react.development'
+import { StateContext } from '../hooks/Contexts'
 
-function Login({dispatchUser}) {
-    console.log("Login freshstart")
+function Login() {
+    const {dispatch} = useContext(StateContext);
     const [username, setUsername] = useState('');
-    console.log("username: " + username)
     function handleUsername(evt) {
-        console.log("In handleUsername")
-        console.log("evt.target.value: " + evt.target.value)
         setUsername(evt.target.value);
     }
     return (
-        <form onSubmit={e => {e.preventDefault();dispatchUser({type: 'LOGIN', username});}}>
+        <form onSubmit={e => {e.preventDefault();dispatch({type: 'LOGIN', username});}}>
             <label htmlFor="login-username">Username:</label>
             <input type="text" value={username} onChange={handleUsername} name="login-username" id="login-username"/>
             <label htmlFor="login-password">Password:</label>

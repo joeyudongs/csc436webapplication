@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Logout from "./Logout";
 import Register from "./Register";
 import Login from './Login';
+import {StateContext} from '../hooks/Contexts'
+import {useContext} from 'react/cjs/react.development'
 
-function UserBar({user, dispatchUser}) {
-    console.log("UserBar freshstart")
-    if (user) {
-        console.log("UserBar if User")
-        return <Logout user={user} dispatchUser={dispatchUser}/>;
+function UserBar() {
+    const { state } = useContext(StateContext);
+    if (state.user) {
+        return <Logout />;
     } else {
-        console.log("UserBar else User")
         return (
             <div>
-                <Login dispatchUser={dispatchUser} />
-                <Register dispatchUser={dispatchUser} />
+                <Login />
+                <Register />
             </div>
         );
     }

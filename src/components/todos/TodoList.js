@@ -1,24 +1,25 @@
-import React from 'react';
+import React from "react";
 import Todo from "./Todo";
+import { StateContext } from "../hooks/Contexts";
+import { useContext } from "react/cjs/react.development";
 
-function TodoList({todos = [], dispatch}) {
-    console.log("TodoList fresh start")
-    console.log("In TodoList todos: ", todos)
-    console.log("In TodoList dispatch: ", dispatch)
-    return (
-        <div>
-            {todos.map((todo, i) =>
-                <div>
-                    <Todo {...todo}
-                          dispatch={dispatch}
-                          title={todo.title}
-                          author={todo.author}
-                          content={todo.content}
-                          key={'todo-' + i}/>
-                </div>
-            )}
-        </div>
-    );
+function TodoList() {
+  const { state } = useContext(StateContext);
+  const { todos } = state;
+  return (
+    <div>
+      {todos.map((t, i) => (
+        <Todo
+          {...t}
+          title={t.title}
+          author={t.author}
+          content={t.content}
+          key={"todo-" + i}
+          todoId={i}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default TodoList;
