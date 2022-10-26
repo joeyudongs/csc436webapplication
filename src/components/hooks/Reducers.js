@@ -35,6 +35,7 @@ function todoReducer (state, action) {
         case 'DELETE_TODO':
             return state.filter((t, i) => i !== action.todoId);
         case 'FETCH_TODOS' :
+            console.log("In Reducer, fetch_todos:", action.todos)
             return action.todos;
         default:
             return state;

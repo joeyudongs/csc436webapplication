@@ -6,6 +6,7 @@ import {StateContext} from '../hooks/Contexts'
 import {useContext} from 'react/cjs/react.development'
 
 function UserBar() {
+    console.log("UserBar")
     const { state } = useContext(StateContext);
     if (state.user) {
         return <Logout />;

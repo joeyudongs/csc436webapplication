@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {ThemeContext} from '../hooks/Contexts'
 
-console.log("In todos Header")
 const Header = ({text}) => {
+    console.log("In todos Header")
     const theme = useContext(ThemeContext)
     return <h1 style={{color: theme.primaryColor}}>{text}</h1>
 }

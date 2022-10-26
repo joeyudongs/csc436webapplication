@@ -1,11 +1,12 @@
 import UserBar from "./users/UserBar";
 import AddTodoTask from "./todos/AddTodoTask";
 import TodoList from "./todos/TodoList";
-import React, {useEffect, useReducer} from "react";
+import ChangeTheme from "./ChangeTheme";
+import React, {useEffect, useReducer, useState} from "react";
 import appReducer from "./hooks/Reducers";
 import Header from "./todos/Header";
 import {ThemeContext, StateContext} from './hooks/Contexts'
-import { useResource } from "react-request-hook";
+import { useResource} from "react-request-hook";
 
 
 function App() {
@@ -31,15 +32,21 @@ function App() {
     //         dateCompleted: ''
     //     }
     // ]
-    
+    const [theme, setTheme] = useState({
+        primaryColor: 'deepskyblue',
+        secondaryColor: 'coral'
+    })
     const [todos, getTodos] = useResource(() => ({
         url: '/todos',
         method: 'get'
     }))
-
+    
     useEffect(getTodos,[])
 
     useEffect(() => {
+        console.log("in App useEffect")
+        console.log("todos: ", todos)
+        console.log("todos.data: ", todos.data)
         if (todos && todos.data) {
             dispatch({type: 'FETCH_TODOS', todos: todos.data})
         }
@@ -50,9 +57,12 @@ function App() {
 
     return (
         <div>
-            <ThemeContext.Provider value={{ primaryColor: 'red', secondaryColor: 'green'}}>
+            {/* <ThemeContext.Provider value={{ primaryColor: 'red', secondaryColor: 'green'}}> */}
+            <ThemeContext.Provider value={theme}>
+
                 <StateContext.Provider value={{ state: state, dispatch: dispatch}}>
                     <Header text="Max's Todo List."/> 
+                    <ChangeTheme theme={theme} setTheme={setTheme} />
                     {/* <UserBar user={user} dispatchUser={dispatch}/> */}
                     <UserBar />
                     {/* {user && <AddTodoTask user={user} dispatch={dispatch}/>} */}

@@ -33,8 +33,8 @@ export default function ChangeTheme ({ theme, setTheme }) {
     useEffect(getThemes, [])
 
     const { data, isLoading } = themes
-
-
+    console.log("data: ", data)
+    console.log("isLoading: ", isLoading)
     function isActive (t) { 
         console.log("isActive t: ", t)
         return t.primaryColor === theme.primaryColor && t.secondaryColor === theme.secondaryColor 
