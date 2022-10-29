@@ -22,9 +22,7 @@ function Login({show, handleClose}) {
     url: `/login/${encodeURI(username)}/${encodeURI(password)}`,
     method: "get",
   }));
-  console.log("user: ", user)
-  console.log("login: ", login)
-  
+
   useEffect(() => {
     if (user && user.data) {
       if (user.data.length > 0) {

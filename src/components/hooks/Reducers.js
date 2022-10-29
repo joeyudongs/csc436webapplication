@@ -1,8 +1,16 @@
 function userReducer(state, action) {
   switch (action.type) {
     case "LOGIN":
+
     case "REGISTER":
       return action.username;
+    // case "REGISTER":
+    //   const newUser = {
+    //     id: action.id,
+    //     username: action.username,
+    //     password: action.password,
+    //   };
+    //   return [newUser, ...state];
     case "LOGOUT":
       return "";
     default:
@@ -19,7 +27,7 @@ function todoReducer(state, action) {
         content: action.content,
         author: action.author,
         complete: false,
-        completedOn: undefined,
+        completedOn: new Date().toLocaleDateString('en-us').toString(),
       };
       return [newTodo, ...state];
     case "TOGGLE_TODO":
@@ -35,6 +43,17 @@ function todoReducer(state, action) {
       return state.filter((t) => t.id !== action.todoId);
     case "FETCH_TODOS":
       return action.todos;
+    case "FETCH_TODOS_BY_USER":
+      return state.filter((t) => t.author === action.author.username);
+    default:
+      return state;
+  }
+}
+
+function usersReducer(state, action) {
+  switch (action.type) {
+    case "FETCH_USERS":
+      return action.users;
     default:
       return state;
   }
@@ -44,5 +63,6 @@ export default function appReducer(state, action) {
   return {
     user: userReducer(state.user, action),
     todos: todoReducer(state.todos, action),
+    users: usersReducer(state.users, action),
   };
 }

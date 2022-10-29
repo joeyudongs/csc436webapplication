@@ -5,8 +5,6 @@ import { Navbar } from "react-bootstrap";
 
 const Header = ({ text }) => {
   const theme = useContext(ThemeContext);
-  console.log("In Header, theme: ", theme)
-  
   return (
     <Link href="/">
       <Navbar.Brand style={{ color: theme.primaryColor }} >{text}</Navbar.Brand>

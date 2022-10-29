@@ -4,16 +4,19 @@ import { useResource } from "react-request-hook";
 import { useNavigation } from "react-navi";
 
 function CreateTodo() {
+  console.log("CreateTodo")
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  console.log("before useResource title: ", title)
+  console.log("before useResouce content: ", content)
   const [todo, createTodo] = useResource(({ title, content, author }) => ({
-    url: "/todos",
-    method: "post",
-    data: { title, content, author },
+    url: "/todos", 
+    method: "post", //post方法，把内容直接post到了database.json中去了
+    data: { title, content, author }, //todo是个object，里面的data内容。createTodo函数改变的就是todo object里面的内容。
   }));
-  console.log("In CreateTodo, todo: ", todo);
-  console.log("createTodo: ", createTodo);
-
+  console.log("after useResource title: ", title)
+  console.log("after useResource content: ", content)
+  console.log("after useResource todo: ", todo)
   const navigation = useNavigation();
 
   const { state, dispatch } = useContext(StateContext);
@@ -37,10 +40,11 @@ function CreateTodo() {
         id: todo.data.id,
         author: user,
       });
-      console.log("/todo/${todo.data.id}: ", '/todo/${todo.data.id}')
-      navigation.navigate(`/todo/${todo.data.id}`);// todo/id
+      console.log("direct to")
+      navigation.navigate(`/todo/${todo.data.id}`);//直接跳转到了新的页面。
     }
   }, [todo]);
+  console.log("after useEffect todo: ", todo)
 
   return (
     <form

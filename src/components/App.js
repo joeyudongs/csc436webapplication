@@ -5,7 +5,10 @@ import { ThemeContext, StateContext } from "./hooks/Contexts";
 import HeaderBar from "../pages/HeaderBar";
 import HomePage from "../pages/HomePage";
 import TodoPage from "../pages/TodoPage";
+import UsersPage from "../pages/UsersPage";
+import ProfilePage from "../pages/ProfilePage";
 import CreateTodo from "./todos/CreateTodo";
+
 import { Router, View } from "react-navi";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
@@ -22,16 +25,16 @@ function App() {
     "/todo/:id": route((req) => {
       return { view: <TodoPage id={req.params.id} /> };
     }),
+    "/users": route({ view: <UsersPage /> }),
+    "/users/:id": route((req) => {
+      return { view: <ProfilePage id={req.params.id} /> };
+    }),
   });
 
-  const [state, dispatch] = useReducer(appReducer, { user: "", todos: [] });
-  const { user } = state;
-
+  const [state, dispatch] = useReducer(appReducer, { user: "", todos: [], users: [] });
   const backgroundImage = {
     backgroundImage: `url(${background})`
   }
-
-  
 
   return (
     <div style={ backgroundImage }>
@@ -40,7 +43,7 @@ function App() {
           <Router routes={routes}>
             <Container>
               <HeaderBar setTheme={setTheme} />
-              <hr />
+              <br />
               <View />
             </Container>
           </Router>

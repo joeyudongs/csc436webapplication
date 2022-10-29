@@ -19,17 +19,16 @@ function ThemeItem({ theme, active, onClick }) {
 }
 
 export default function ChangeTheme ({ theme, setTheme }) {
-  console.log("In ChangeTheme")
+
   const [ themes, getThemes ] = useResource(() => ({
       url: '/themes',
       method: 'get'
   }))
-  console.log("theme: ", theme)
-  console.log("getTheme: ", getThemes)
+
   useEffect(getThemes, [])
 
   const { data, isLoading } = themes
-
+  console.log("In ChangeTheme: ", data);
 
   function isActive (t) { return t.primaryColor === theme.primaryColor && t.secondaryColor === theme.secondaryColor }
   return ( <>
@@ -41,7 +40,6 @@ export default function ChangeTheme ({ theme, setTheme }) {
                   </NavDropdown.Item>
           )} 
        </NavDropdown>
-       </>
-       
+       </>  
   )
 }

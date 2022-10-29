@@ -17,12 +17,8 @@ function Register({ show, handleClose }) {
     method: "post",
     data: { username, password },
   }));
-  console.log("In Register, user: ", user)
-  console.log("register: ", register)
 
   useEffect(() => {
-    console.log("In Regiseter useEffect, user: ", user)
-    console.log("In Regiseter useEffect, user.data: ", user.data)
     if (user && user.data) {
       dispatch({ type: "REGISTER", username: user.data.username });
     }
@@ -33,7 +29,6 @@ function Register({ show, handleClose }) {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log("formData.username: ", formData.username)
           register(formData.username, formData.password);
           handleClose();
         }}
