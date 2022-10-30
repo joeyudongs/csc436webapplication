@@ -11,9 +11,8 @@ function UsersPage() {
     }));
     useEffect(getUsers, []);
     useEffect(() => {
-        console.log(users);
         if (users && users.data) {
-            dispatch({ type: "FETCH_USERS", users: users.data })
+            dispatch({ type: "FETCH_USERS", users: users.data.users })
         }
     }, [users]);
     const { isLoading } = users;

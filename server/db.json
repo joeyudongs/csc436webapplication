@@ -55,22 +55,10 @@
       "id": 6
     },
     {
-      "title": "wewer",
-      "content": "wefwfe",
-      "author": "aaa",
+      "title": "Sebastian-1",
+      "content": "dakjsgz chvjkx zlijxlcjln kcnvdfgcfgvh",
+      "author": "Sebastian",
       "id": 7
-    },
-    {
-      "title": "qqqqqqq",
-      "content": "wwwwwww",
-      "author": "aaa",
-      "id": 8
-    },
-    {
-      "title": "ppp",
-      "content": "ooo",
-      "author": "aaa",
-      "id": 9
     }
   ],
   "users": [
@@ -103,11 +91,6 @@
       "username": "Nov",
       "password": "1234",
       "id": 6
-    },
-    {
-      "username": "aaa",
-      "password": "aaa",
-      "id": 7
     }
   ],
   "themes": [

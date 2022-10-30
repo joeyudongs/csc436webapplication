@@ -28,7 +28,7 @@ export default function ChangeTheme ({ theme, setTheme }) {
   useEffect(getThemes, [])
 
   const { data, isLoading } = themes
-  console.log("In ChangeTheme: ", data);
+
 
   function isActive (t) { return t.primaryColor === theme.primaryColor && t.secondaryColor === theme.secondaryColor }
   return ( <>
@@ -40,6 +40,7 @@ export default function ChangeTheme ({ theme, setTheme }) {
                   </NavDropdown.Item>
           )} 
        </NavDropdown>
-       </>  
+       </>
+       
   )
 }

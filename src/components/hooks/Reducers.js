@@ -3,16 +3,15 @@ function userReducer(state, action) {
     case "LOGIN":
 
     case "REGISTER":
-      return action.username;
-    // case "REGISTER":
-    //   const newUser = {
-    //     id: action.id,
-    //     username: action.username,
-    //     password: action.password,
-    //   };
-    //   return [newUser, ...state];
+      return {
+        'username': action.username,
+        'access_token': action.access_token
+      }
     case "LOGOUT":
-      return "";
+      return { 
+        'username': action.username,
+        'access_token': undefined
+      }
     default:
       return state;
   }
@@ -26,21 +25,21 @@ function todoReducer(state, action) {
         title: action.title,
         content: action.content,
         author: action.author,
-        complete: false,
-        completedOn: new Date().toLocaleDateString('en-us').toString(),
+        complete: action.complete,
+        completedOn: action.completeOn,
       };
       return [newTodo, ...state];
     case "TOGGLE_TODO":
       return state.map((t) => {
-        if (t.id === action.todoId) {
+        if (t._id === action.todoId) {
           t.complete = action.complete;
-          t.completeOn = Date.now();
+          t.completeOn = action.completeOn;
         }
         return t;
       });
 
     case "DELETE_TODO":
-      return state.filter((t) => t.id !== action.todoId);
+      return state.filter((t) => t._id !== action.todoId);
     case "FETCH_TODOS":
       return action.todos;
     case "FETCH_TODOS_BY_USER":

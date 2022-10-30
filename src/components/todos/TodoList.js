@@ -1,12 +1,12 @@
 import React from "react";
+import { useContext } from 'react/cjs/react.development';
 import Todo from "./Todo";
 import { StateContext } from "../hooks/Contexts";
-import { useContext } from "react/cjs/react.development";
 
 function TodoList() {
   const { state } = useContext(StateContext);
   const { todos } = state;
-  console.log("TodoList todos: ", todos);
+  console.log(todos);
   return (
     <div>
       {todos.map((t, i) => (
@@ -17,7 +17,7 @@ function TodoList() {
           author={t.author}
           content={t.content}
           key={"todo-" + i}
-          todoId={t.id}
+          todoId={t._id}
         />
       ))}
     </div>

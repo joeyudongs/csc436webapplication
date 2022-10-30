@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import { mount, route } from "navi";
 import appReducer from "./hooks/Reducers";
 import { ThemeContext, StateContext } from "./hooks/Contexts";
@@ -11,8 +11,7 @@ import CreateTodo from "./todos/CreateTodo";
 
 import { Router, View } from "react-navi";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
-import background from "../assets/bg1.jpg";
+import { Container } from "react-bootstrap";
 
 function App() {
   const [theme, setTheme] = useState({
@@ -31,13 +30,11 @@ function App() {
     }),
   });
 
-  const [state, dispatch] = useReducer(appReducer, { user: "", todos: [], users: [] });
-  const backgroundImage = {
-    backgroundImage: `url(${background})`
-  }
+  const [state, dispatch] = useReducer(appReducer, { user: {}, todos: [], users: [] });
+  const { user } = state;
 
   return (
-    <div style={ backgroundImage }>
+    <div > 
       <ThemeContext.Provider value={theme}>
         <StateContext.Provider value={{ state: state, dispatch: dispatch }}>
           <Router routes={routes}>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-navi";
-import { ThemeContext, StateContext } from "../hooks/Contexts";
+import { StateContext } from "../hooks/Contexts";
 import { useResource } from "react-request-hook";
 import { Card, Button } from "react-bootstrap";
 function Todo({
@@ -12,38 +12,30 @@ function Todo({
   todoId,
   short = false,
 }) {
-  const { secondaryColor } = useContext(ThemeContext);
-  const { dispatch } = useContext(StateContext);
+  const { state, dispatch } = useContext(StateContext);
 
-  let processedContent = content;
-  if (short) {
-    if (content.length > 30) {
-      processedContent = content.substring(0, 30) + "...";
-    }
-  }
-  console.log("processedConent: ", processedContent);
+  console.log("todoId is: " + todoId);
 
-  console.log("Todo Rendered");
-  const [deletedTodo, deleteTodo] = useResource((todoId) => ({
-    url: `/todos/${todoId}`,
-    method: "delete",//delete是database.js中的内容。
+  const [deletedTodo, deleteTodo] = useResource(() => ({
+    url: `/todo/${todoId}`,
+    method: "delete",
+    headers: {"Authorization": `${state.user.access_token}`},
   }));
-  console.log("In Todo, deletedTodo: ", deletedTodo)
-  console.log("In Todo, deleteTodo: ", deleteTodo)
-  console.log("todoId: ", todoId);
-  
-  const [toggledTodo, toggleTodo] = useResource((todoId, completed) => ({
-    url: `/todos/${todoId}`,
-    method: "patch",
+
+  const [toggledTodo, toggleTodo] = useResource((todoId, complete) => ({
+    url: `/todo/${todoId}`,
+    method: "put",
+    headers: {"Authorization": `${state.user.access_token}`},
     data: {
-      complete: completed,
+      complete: complete,
       completedOn: Date.now(),
     },
   }));
 
   useEffect(() => {
+    console.log("deletedTodo is: " + deletedTodo);
     if (deletedTodo && deletedTodo.data && deletedTodo.isLoading === false) {
-      dispatch({ type: "DELETE_TODO", todoId: todoId });
+      dispatch({ type: "DELETE_TODO", todoId: deletedTodo.data._id });
     }
   }, [deletedTodo]);
 
@@ -53,35 +45,62 @@ function Todo({
         type: "TOGGLE_TODO",
         complete: toggledTodo.data.complete,
         completedOn: toggledTodo.data.completeOn,
-        todoId,
+        todoId: toggledTodo.data._id
       });
     }
   }, [toggledTodo]);
 
+  let processedContent = content;
+  if (short) {
+    if (content.length > 30) {
+      processedContent = content.substring(0, 30) + "...";
+    }
+  }
+
   return (
-    <Card >
-      <Card.Body >
+    <Card>
+      <Card.Body>
         <Card.Title>
-          <Link style={{ color: '#000000' }} href={`/todo/${todoId}`}>
+          <Link style={{ color: "#000000" }} href={`/todo/${todoId}`}>
             {title}
           </Link>
         </Card.Title>
         <Card.Subtitle>
-          <i style={{color: "#000000"}}>
+          <i style={{ color: "#000000" }}>
             Created by <b>{author}</b>
           </i>
         </Card.Subtitle>
-        <Card.Text >{processedContent}</Card.Text>
-        <input type="checkbox" checked={complete} onChange={e => {toggleTodo(todoId, e.target.checked)}} />
+        <Card.Text>{processedContent}</Card.Text>
+        <input
+          type="checkbox"
+          checked={complete}
+          onChange={(e) => {
+            toggleTodo(todoId, e.target.checked);
+          }}
+        />
         {short && (
-          <Button variant="blank" href={`/todo/${todoId}`} style={{backgroundColor: '#94b0ab'}}>
+          <Button
+            variant="blank"
+            href={`/todo/${todoId}`}
+            style={{ backgroundColor: "#94b0ab" }}
+          >
             View Full Content
           </Button>
         )}
-        <Button variant="blank" onClick={() => {deleteTodo(todoId)}} style={{backgroundColor: '#94b0f1'}}>
+        <Button
+          variant="blank"
+          onClick={() => {
+            deleteTodo(todoId);
+          }}
+          style={{ backgroundColor: "#94b0f1" }}
+        >
           Delete Todo
         </Button>
-        {complete && <i>Completed on: {new Date(completedOn).toLocaleDateString('en-us')}</i>}
+        {complete && (
+          <i>
+            Completed on: {new Date(completedOn).toLocaleDateString("en-us")}
+          </i>
+        )}
       </Card.Body>
     </Card>
   );

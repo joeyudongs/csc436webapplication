@@ -7,10 +7,11 @@ import { StateContext } from "../components/hooks/Contexts";
 import TodoList from "../components/todos/TodoList";
 
 function ProfilePage({ id }) {
-  const { dispatch } = useContext(StateContext);
+  const { state, dispatch } = useContext(StateContext);
   const [user, getUser] = useResource(() => ({
     url: `/users/${id}`,
     method: "get",
+    headers: { "Authorization": `${state.user.access_token}` },
   }));
 
   useEffect(getUser, [id]);
@@ -19,6 +20,7 @@ function ProfilePage({ id }) {
   const [todos, getTodos] = useResource(() => ({
     url: "/todos",
     method: "get",
+    headers: { "Authorization": `${state.user.access_token}` },
   }));
   useEffect(getTodos, []);
   useEffect(() => {
@@ -26,12 +28,12 @@ function ProfilePage({ id }) {
       dispatch({ type: "FETCH_TODOS", todos: todos.data });
     }
   }, [todos]);
+  console.log("todos are " + todos);
   const { isLoading } = todos;
 
 
   useEffect(() => {
-    if (user && user.data) {
-      console.log("checking" + user.data.username)
+    if (user) {
       dispatch({ type: "FETCH_TODOS_BY_USER", author: user.data });
     }
   }, [todos]);
